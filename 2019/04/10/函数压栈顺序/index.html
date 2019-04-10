@@ -6,19 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Hello World | Hexo</title>
+  <title>函数压栈顺序 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <meta name="description" content="函数参数压栈顺序。 从右至左。原因： 以printf为例。参考博客 1int printf (const char *__format, ...) 不定参函数，编译器根据__format中占位符号的个数来计算参数个数。 如果从左至右压栈，那么__format会被压入栈中，最后一个参数位于栈顶，此时编译器需要获取__format才能计算参数个数。但上面的参数个数未知。此方式不行。 从右至左压栈，_">
+<meta name="keywords" content="C&#x2F;C++">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2019/04/09/hello-world/index.html">
+<meta property="og:title" content="函数压栈顺序">
+<meta property="og:url" content="http://yoursite.com/2019/04/10/函数压栈顺序/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="函数参数压栈顺序。 从右至左。原因： 以printf为例。参考博客 1int printf (const char *__format, ...) 不定参函数，编译器根据__format中占位符号的个数来计算参数个数。 如果从左至右压栈，那么__format会被压入栈中，最后一个参数位于栈顶，此时编译器需要获取__format才能计算参数个数。但上面的参数个数未知。此方式不行。 从右至左压栈，_">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-04-09T13:52:47.944Z">
+<meta property="og:updated_time" content="2019-04-10T13:50:42.306Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="函数压栈顺序">
+<meta name="twitter:description" content="函数参数压栈顺序。 从右至左。原因： 以printf为例。参考博客 1int printf (const char *__format, ...) 不定参函数，编译器根据__format中占位符号的个数来计算参数个数。 如果从左至右压栈，那么__format会被压入栈中，最后一个参数位于栈顶，此时编译器需要获取__format才能计算参数个数。但上面的参数个数未知。此方式不行。 从右至左压栈，_">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -154,35 +155,54 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-hello-world" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-函数压栈顺序" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Hello World
+      函数压栈顺序
     </h1>
   
 
         
-        <a href="/2019/04/09/hello-world/" class="archive-article-date">
-  	<time datetime="2019-04-09T13:52:47.944Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-09</time>
+        <a href="/2019/04/10/函数压栈顺序/" class="archive-article-date">
+  	<time datetime="2019-04-10T13:49:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-10</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+        <ol>
+<li><p>函数参数压栈顺序。</p>
+<p>从右至左。原因：</p>
+<p>以<code>printf</code>为例。<a href="http://www.cnblogs.com/mini-coconut/p/9267469.html" target="_blank" rel="noopener">参考博客</a></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">printf</span> <span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *__format, ...)</span></span></span><br></pre></td></tr></table></figure>
+<p>不定参函数，编译器根据<code>__format</code>中占位符号的个数来计算参数个数。</p>
+<p>如果从左至右压栈，那么<code>__format</code>会被压入栈中，最后一个参数位于栈顶，此时编译器需要获取<code>__format</code>才能计算参数个数。但上面的参数个数未知。此方式不行。</p>
+<p>从右至左压栈，<code>__format</code>位于栈顶，通过<code>esp</code>就能找到<code>__format</code>。</p>
+</li>
+</ol>
+<p>   考虑如下代码片段：</p>
+   <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//mingw32</span></span><br><span class="line"><span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d %d\n"</span>, i++, i++); <span class="comment">// 1 0</span></span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+<pre><code>由输出可见，压栈顺序是从右往左。
+</code></pre>   <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//mingw32</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">f</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; &amp;a &lt;&lt; <span class="string">" "</span> &lt;&lt; &amp;b &lt;&lt; <span class="built_in">endl</span>; <span class="comment">//0x28fea0 0x28fea4</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">    f(i++, i++); <span class="comment">// 1 0</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>   linux系统中，栈的方向是从高地址向低地址增长，即栈顶位于低地址处。<br>   上述代码中，<code>b</code>先入栈，随后<code>a</code>入栈，所以 <code>a</code>的地址小于<code>b</code>的地址。</p>
+<ol start="2">
+<li><p><code>class</code>的成员变量压栈顺序。</p>
+<blockquote>
+<p>struct 同 class一样。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//mingw32</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Test() : a(<span class="number">0</span>), c(<span class="number">0</span>), b(<span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">//0x28feb4 0x28feb8 0x28febc</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; &amp;a &lt;&lt; <span class="string">" "</span> &lt;&lt; &amp;b &lt;&lt; <span class="string">" "</span> &lt;&lt; &amp;c &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="keyword">int</span> b;</span><br><span class="line">    <span class="keyword">int</span> c;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Test t;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>由输出可见Test的成员变量压栈顺序是 <code>c</code> -&gt; <code>b</code> -&gt; `a</p>
+</li>
+<li><p>考虑到类的继承。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//mingw32</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Test() : a(<span class="number">0</span>), c(<span class="number">0</span>), b(<span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">//0x28feac 0x28feb0 0x28feb4</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; &amp;a &lt;&lt; <span class="string">" "</span> &lt;&lt; &amp;b &lt;&lt; <span class="string">" "</span> &lt;&lt; &amp;c &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="keyword">int</span> b;</span><br><span class="line">    <span class="keyword">int</span> c;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestA</span> :</span> <span class="keyword">public</span> Test &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    TestA() &#123;</span><br><span class="line">        <span class="comment">//0x28feb8 0x28febc</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; &amp;d &lt;&lt; <span class="string">" "</span> &lt;&lt; &amp;e &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">    <span class="keyword">int</span> d;</span><br><span class="line">    <span class="keyword">int</span> e;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>可见，先入栈派生类成员变量，再入栈基类成员变量。</p>
+</li>
+</ol>
 
       
 
@@ -212,6 +232,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">C/C++</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -262,7 +293,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/04/09/hello-world/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/04/10/函数压栈顺序/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -276,15 +307,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/04/09/linux进程之pid/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          linux进程之pid
-        
-      </div>
-    </a>
   
+    <a href="/2019/04/09/linux进程之pid/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">linux进程之pid</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 

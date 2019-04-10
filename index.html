@@ -152,6 +152,169 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-函数压栈顺序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/10/函数压栈顺序/">函数压栈顺序</a>
+    </h1>
+  
+
+        
+        <a href="/2019/04/10/函数压栈顺序/" class="archive-article-date">
+  	<time datetime="2019-04-10T13:49:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-10</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li><p>函数参数压栈顺序。</p>
+<p>从右至左。原因：</p>
+<p>以<code>printf</code>为例。<a href="http://www.cnblogs.com/mini-coconut/p/9267469.html" target="_blank" rel="noopener">参考博客</a></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">printf</span> <span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *__format, ...)</span></span></span><br></pre></td></tr></table></figure>
+<p>不定参函数，编译器根据<code>__format</code>中占位符号的个数来计算参数个数。</p>
+<p>如果从左至右压栈，那么<code>__format</code>会被压入栈中，最后一个参数位于栈顶，此时编译器需要获取<code>__format</code>才能计算参数个数。但上面的参数个数未知。此方式不行。</p>
+<p>从右至左压栈，<code>__format</code>位于栈顶，通过<code>esp</code>就能找到<code>__format</code>。</p>
+</li>
+</ol>
+<p>   考虑如下代码片段：</p>
+   <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//mingw32</span></span><br><span class="line"><span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d %d\n"</span>, i++, i++); <span class="comment">// 1 0</span></span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+<pre><code>由输出可见，压栈顺序是从右往左。
+</code></pre>   <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//mingw32</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">f</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; &amp;a &lt;&lt; <span class="string">" "</span> &lt;&lt; &amp;b &lt;&lt; <span class="built_in">endl</span>; <span class="comment">//0x28fea0 0x28fea4</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">    f(i++, i++); <span class="comment">// 1 0</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>   linux系统中，栈的方向是从高地址向低地址增长，即栈顶位于低地址处。<br>   上述代码中，<code>b</code>先入栈，随后<code>a</code>入栈，所以 <code>a</code>的地址小于<code>b</code>的地址。</p>
+<ol start="2">
+<li><p><code>class</code>的成员变量压栈顺序。</p>
+<blockquote>
+<p>struct 同 class一样。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//mingw32</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Test() : a(<span class="number">0</span>), c(<span class="number">0</span>), b(<span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">//0x28feb4 0x28feb8 0x28febc</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; &amp;a &lt;&lt; <span class="string">" "</span> &lt;&lt; &amp;b &lt;&lt; <span class="string">" "</span> &lt;&lt; &amp;c &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="keyword">int</span> b;</span><br><span class="line">    <span class="keyword">int</span> c;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Test t;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>由输出可见Test的成员变量压栈顺序是 <code>c</code> -&gt; <code>b</code> -&gt; `a</p>
+</li>
+<li><p>考虑到类的继承。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//mingw32</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Test() : a(<span class="number">0</span>), c(<span class="number">0</span>), b(<span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">//0x28feac 0x28feb0 0x28feb4</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; &amp;a &lt;&lt; <span class="string">" "</span> &lt;&lt; &amp;b &lt;&lt; <span class="string">" "</span> &lt;&lt; &amp;c &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="keyword">int</span> b;</span><br><span class="line">    <span class="keyword">int</span> c;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestA</span> :</span> <span class="keyword">public</span> Test &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    TestA() &#123;</span><br><span class="line">        <span class="comment">//0x28feb8 0x28febc</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; &amp;d &lt;&lt; <span class="string">" "</span> &lt;&lt; &amp;e &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">    <span class="keyword">int</span> d;</span><br><span class="line">    <span class="keyword">int</span> e;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>可见，先入栈派生类成员变量，再入栈基类成员变量。</p>
+</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">C/C++</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/04/10/函数压栈顺序/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-linux进程之pid" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/09/linux进程之pid/">linux进程之pid</a>
+    </h1>
+  
+
+        
+        <a href="/2019/04/09/linux进程之pid/" class="archive-article-date">
+  	<time datetime="2019-04-09T14:07:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/04/09/linux进程之pid/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -314,6 +477,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">C/C++</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>

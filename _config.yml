@@ -114,7 +114,7 @@ plantuml:
   # where your dot binary
   GraphvizDotFile: "/usr/bin/dot"
   # where your jar
-  PlantJar: "/data/liuzheng/plantuml.jar"
+  PlantJar: "/home/liuzheng/plantuml.jar"
 
   # common options: svg/png
   outputFormat: "svg"

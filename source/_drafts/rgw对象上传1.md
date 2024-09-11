@@ -131,27 +131,106 @@ class RadosMultipartWriter extends Writer {
 
 
 目前，rgw支持三种上传方式：
-1. 分段上传
-2. 原子上传
-3. 追加写
+1. multipart
+2. append
+3. atomic
 
 
-## 原子上传
-
-get_data： 4M HEAD
+## 通用流程
 
 ```plantuml
 @startuml
-class HeadObjectProcessor {
-  # virtual int process_first_chunk(data, processor<out>)
+start
+:get_xxx_writer;
+note left
+atomic: RadosAtomicWriter
+append: RadosAppendWriter
+multipart: RadosMultipartWriter
+end note
+:ObjectProcessor::prepare;
+:ObjectProcessor::process;
+:ObjectProcessor::complete;
+end
+@enduml
+```
+
+## Atomic上传
+### RadosAtomicWriter
+```plantuml
+@startuml
+class DataProcessor {
+  # virtual int process(bufferlist&&, uint64_t) = 0;
+}
+
+class ObjectProcessor extends DataProcessor {
+  + virtual int prepare(...) = 0;
+  + virtual int complete(...) = 0;
+}
+
+class Writer extends ObjectProcessor {
+  //继承父类所有的纯虚函数，没有实现。
+}
+
+class RadosAtomicWriter extends Writer {
+  # store : rgw::sal::RadosStore;
+  # aio: std::unique_ptr<Aio>;
+  # processor: AtomicObjectProcessor;
 }
 @enduml
 ```
 
+接下来看看`RadosAtomicWriter`的实现：
+![alt text](image.png)
+
+所以，`RadosAtomicWriter`其实就是`AtomicObjectProcessor`的proxy。rgw为啥这样设计呢？
+{% note warning %}
+[**待修改**]在旧版本的rgw代码中，Writer相关的API和Rados的耦合十分严重。从Qunicy版本，rgw引入了DBStore，为了兼容不同的存储底座，需要抽象出一套通用的API（其实就是Writer，从Store::get_xxx_writer的返回值就可以看出来）用于对象上传。
+同时，为了复用已有的Rados Atomic上传的代码，就使用了代理模式，使之兼容新的Writer API。
+[其实我也搞不清这是代理模式还是适配器模式](https://www.cnblogs.com/gocode/p/proxy-pattern-and-adapter-pattern.html)
+{% endnote %}
+
+### AtomicObjectProcessor
+
 ```plantuml
 @startuml
-class HeadObjectProcessor {
-  # virtual int process_first_chunk(data, processor<out>)
+class HeadObjectProcessor extends ObjectProcessor {
+  - head_chunk_size: uint64_t
+  - head_data: bufferlist
+  - processor: DataProcessor
+  - data_offset: uint64_t
+  # virtual int process_first_chunk(bufferlist&&, DataProcessor **) = 0;
+  + int process(bufferlist&& data, uint64_t logical_offset) final override;
+}
+
+class StripeGenerator {
+  + virtual int next(uint64_t offset, uint64_t *stripe_size) = 0;
+}
+
+class ManifestObjectProcessor extends HeadObjectProcessor, StripeGenerator {
+
+}
+
+class AtomicObjectProcessor extends ManifestObjectProcessor {
+  - int process_first_chunk(bufferlist&&, rgw::sal::DataProcessor**) override;
+}
+@enduml
+```
+
+
+```plantuml
+@startuml
+start
+:AtomicObjectProcessor::prepare;
+end
+@enduml
+```
+
+
+```plantuml
+@startuml
+class rgw_placement_rule {
+  + name: std::string
+  + storage_class: std::string
 }
 @enduml
 ```

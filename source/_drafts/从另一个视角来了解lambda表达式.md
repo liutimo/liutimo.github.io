@@ -1,4 +1,5 @@
 ---
+uuid: 248a6ce5-8d26-11ef-87e9-758771b60cf9
 title: 从另一个视角来了解lambda表达式
 date: 2024-09-08 23:13:36
 updated:

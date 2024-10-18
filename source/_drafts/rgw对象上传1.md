@@ -234,3 +234,5 @@ class rgw_placement_rule {
 }
 @enduml
 ```
+在RGW Zipper Project前，rgw只支持rados底座，Zipper Project后，rgw引入了sal层将S3/Swift 协议层 与 存储后端分离。
+

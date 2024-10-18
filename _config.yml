@@ -97,9 +97,14 @@ ignore:
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 #theme: landscape
-theme: next 
+theme: fluid 
 
 # Deployment
+deploy:
+  type: git
+  repository: https://github.com/liutimo/liutimo.github.io
+  branch: master
+
 ## Docs: https://hexo.io/docs/one-command-deployment
 plantuml:
   #  Local or PlantUMLServer.
@@ -109,15 +114,15 @@ plantuml:
   # "inlineUrlEncode": <img src='data:image/svg+xml;> 
   # "inlineBase64": <img src='data:image/svg+xml;base64> 
   # "localLink": <img src="/assert/puml/xxxx.svg">
-  link: "inlineBase64"
+  link: "localLink"
 
   # where your dot binary
   GraphvizDotFile: "/usr/bin/dot"
   # where your jar
-  PlantJar: "/root/plantuml.jar"
+  PlantJar: "/home/liuzheng/plantuml.jar"
 
   # common options: svg/png
-  outputFormat: "svg"
+  outputFormat: "png"
 
   # class-name for element style. The default style is center-aligned block
   className: "plantuml"

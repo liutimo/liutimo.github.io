@@ -3,11 +3,11 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 提莫队长
+title: Timo
 subtitle: ''
 description: ''
 keywords:
-author: Liutimo
+author: liutimo
 language:  zh-CN
 timezone: ''
 
@@ -114,7 +114,7 @@ plantuml:
   # where your dot binary
   GraphvizDotFile: "/usr/bin/dot"
   # where your jar
-  PlantJar: "/home/liuzheng/plantuml.jar"
+  PlantJar: "/root/plantuml.jar"
 
   # common options: svg/png
   outputFormat: "svg"

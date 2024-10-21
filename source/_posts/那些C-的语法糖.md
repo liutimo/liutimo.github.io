@@ -6,6 +6,7 @@ categories: C++
 abbrlink: 50032
 date: 2024-09-08 21:22:58
 updated: 2024-09-09 13:36:58
+index_img: /imgs/common/cpp.png
 ---
 
 

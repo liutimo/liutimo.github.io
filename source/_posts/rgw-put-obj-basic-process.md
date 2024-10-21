@@ -4,6 +4,8 @@ title: RGW对象上传基本流程
 abbrlink: 52732
 date: 2024-10-18 15:42:31
 updated:
+banner_img: /imgs/20241021_1.png
+index_img: /imgs/20241021_1.png
 tags: rgw
 categories: ceph
 ---
@@ -21,7 +23,9 @@ RGW支持三种类型的上传方式，分别是：
 `PUT /Key+?partNumber=PartNumber&uploadId=UploadId HTTP/1.1`。
 rgw就是根据http 参数中是否包含uploadId来判断是否是 Multipart方式上传。
 
-> [aws S3 api Upload UploadPart](https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html)
+{% note primary %}
+[aws S3 api: UploadPart](https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPart.html)
+{% endnote %}
 
 ```c++
 std::unique_ptr<rgw::sal::Writer> processor;
@@ -35,7 +39,10 @@ if (multipart) {
 ```
 
 ### Append
-> 追加写方式在S3协议中并没有找到相应说明，应该是rgw扩展的。
+
+{% note warning %}
+追加写方式在S3协议中并没有找到相应说明，应该是rgw扩展的。
+{% endnote %}
 
 当客户端通过Append方式上传对象时，请求如下：
 `PUT /bucket1/hello?append&position=6 HTTP/1.1`

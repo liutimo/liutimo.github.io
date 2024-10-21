@@ -27,7 +27,6 @@
     "hexo-renderer-marked": "^6.3.0",
     "hexo-renderer-stylus": "^3.0.1",
     "hexo-server": "^3.0.0",
-    "hexo-theme-fluid": "^1.9.8",
     "hexo-theme-landscape": "^1.0.0",
     "hexo-uuid": "^1.0.4",
     "live2d-widget-model-hijiki": "^1.0.5"

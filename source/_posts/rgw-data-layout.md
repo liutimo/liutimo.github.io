@@ -1,12 +1,13 @@
 ---
 uuid: f1050b40-9014-11ef-a4dd-2de1cc9ef4b7
 title: RGW Data Layout
-tags: rgw
+excerpt: 简单的介绍rgw的Metadata、bucket index 和 data 在存储底座的布局。
+tags: [rgw, draft]
 categories: ceph
 index_img: /imgs/rgw-data-layout/20241022.png
 abbrlink: 25891
 date: 2024-10-22 09:28:28
-updated: 2024-10-22 09:28:28
+updated: 2024-10-22 16:03:28
 ---
 
 # RGW Data Layout

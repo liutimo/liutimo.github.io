@@ -4,5 +4,5 @@ date: {{ date }}
 updated: {{ updated }}
 tags:
 categories:
-index_img: /imgs/20241021_1.png
+banner_img: https://bing.mcloc.cn/img/2024/10/24/2024-10-24_hd.jpg
 ---

@@ -8,6 +8,7 @@ banner_img: /imgs/20241021_1.png
 index_img: /imgs/20241021_1.png
 tags: rgw
 categories: ceph
+mermaid: true
 ---
 
 ## RGW支持的上传方式
@@ -71,35 +72,46 @@ processor = store->get_atomic_writer(...);
 
 如前所述，rgw根据客户端的上传方式获取到对应的 Writer实例，然后依次调用其`prepare`->`process`->`compelete`成员函数即可完成对象上传操作。
 
-```plantuml
-@startuml
-start
-:get_xxx_writer;
-:Writer::prepare;
-:Writer::process;
-:Writer::complete;
-end
-@enduml
+```mermaid
+---
+title: RGW Put Obj 流程图
+theme: default
+---
+flowchart LR
+get_xxx_writer --> Writer::prepare --> Writer::process --> Writer::complete
+
 ```
 
 最后，来看一下rados后端这三种上传初始对应的Writer的类图。
 
-```plantuml
-@startuml
 
-interface DataProcessor {
-  + virtual int process(bufferlist&& data, uint64_t ofs) = 0
-}
+```mermaid
+---
+title: RGW Put Obj Writer类图
+theme: default
+---
+classDiagram
+  class DataProcessor {
+    <<interface>>
+    + process(data, offset) int
+  }
+  class ObjectProcessor {
+    <<interface>>
+    + prepare() int
+    + complete() int
+  }
+  ObjectProcessor --|> DataProcessor
+  class Writer {
+    <<interface>>
+  }
 
-interface ObjectProcessor extends DataProcessor {
-  + virtual int prepare(optional_yield y) = 0;
-  + virtual int complete(...) = 0;
-}
+  Writer --|> ObjectProcessor
 
-interface Writer extends ObjectProcessor {}
+  class RadosAtomicWriter
+  class RadosAppendWriter
+  class RadosMultipartWriter
 
-class RadosAtomicWriter extends Writer {}
-class RadosAppendWriter extends Writer {}
-class RadosMultipartWriter extends Writer {}
-@enduml
+  RadosAtomicWriter --|> Writer
+  RadosAppendWriter --|> Writer
+  RadosMultipartWriter --|> Writer
 ```

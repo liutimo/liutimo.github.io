@@ -29,8 +29,7 @@ classDiagram
     + prepare() int
     + complete() int
   }
-  DataProcessor <|-- ObjectProcessor
-
+  ObjectProcessor --|> DataProcessor
   class Pipe {
     - DataProcessor* next
   }
@@ -96,4 +95,22 @@ classDiagram
 ```
 
 
-在{% post_link 'RGW Data Layout' %}中我们知道， 
+在{% post_link 'RGW Data Layout' %}中我们知道rgw 对象有几个size相关的参数：
+1. Head size
+2. Stripe size
+3. Chunk size
+
+
+在RGW整体上传流程中，对Head、Stripe、Chunk的处理采用的是责任链模式。
+
+
+```mermaid
+---
+title: RGW Put Obj 流程图
+theme: default
+---
+flowchart LR
+StripeProcessor --> ChunkProcessor --> RadosWriter
+```
+
+当客户端

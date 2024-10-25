@@ -17,85 +17,83 @@ mermaid: true
 ```mermaid
 ---
 title: put obj class diagram
+theme: default
 ---
 classDiagram
-    class DataProcessor {
-      <<interface>>
-      + int process(bufferlist&& data, uint64_t offset) = 0;
-    }
-    DataProcessor <|-- ObjectProcessor
-    Animal <|-- Duck
-    note for Duck "can fly\ncan swim\ncan dive\ncan help in debugging"
-    Animal <|-- Fish
-    Animal <|-- Zebra
-    Animal : +int age
-    Animal : +String gender
-    Animal: +isMammal()
-    Animal: +mate()
-    class Duck{
-        +String beakColor
-        +swim()
-        +quack()
-    }
-    class Fish{
-        -int sizeInFeet
-        -canEat()
-    }
-    class Zebra{
-        +bool is_wild
-        +run()
-    }
+  class DataProcessor {
+    <<interface>>
+    + process(data, offset) int
+  }
+  class ObjectProcessor {
+    <<interface>>
+    + prepare() int
+    + complete() int
+  }
+  DataProcessor <|-- ObjectProcessor
+
+  class Pipe {
+    - DataProcessor* next
+  }
+
+  Pipe --|> DataProcessor
+
+  class ChunkProcessor {
+    - uint64_t chunk_size
+    - bufferlist chunk
+    + process(data, offset) int
+  }
+
+  class StripeProcessor {
+    - StripeGenator* gen
+    - pair<uint64_t, uint64_t> bounds
+  }
+
+  ChunkProcessor --|> Pipe
+  StripeProcessor --|> Pipe
+
+  class RadosWriter {
+    + process(data, offset) int
+  }
+  RadosWriter --|> DataProcessor
+
+  class HeadObjectProcessor {
+    - unit64_t head_chunk_size 
+    - bufferlist head_data
+    - DataProcessor* processor
+    - uint64_t data_offest
+    # process_first_chunk(data, processor) int
+  }
+  HeadObjectProcessor --|> ObjectProcessor
+
+  class StripeGenerator {
+    <<interface>>
+    + next(uint64_t offset, uint64_t *stripe_size) int
+  }
+
+  class ManifestObjectProcessor {
+    # ChunkProcessor chunk
+    # StripeProcessor stripe
+    # RadosWriter writer;
+    # RGWObjManifest manifest;
+    # RGWObjManifest::generator manifest_gen;
+    # next(uint64_t offset, uint64_t *stripe_size) int
+  }
+  ManifestObjectProcessor --* RadosWriter
+  ManifestObjectProcessor --* ChunkProcessor
+  ManifestObjectProcessor --* StripeProcessor
+
+  ManifestObjectProcessor --|> StripeGenerator
+  ManifestObjectProcessor --|> HeadObjectProcessor
+
+  class AtomicObjectProcessor {
+    - bufferlist first_chunk
+    - process_first_chunk(data, processor) int
+    + prepare() int
+    + complete() int
+  }
+
+  AtomicObjectProcessor --|> ManifestObjectProcessor
 ```
 
 
-
-
-
-```plantuml
-@startuml
-
-interface DataProcessor {
-}
-
-interface ObjectProcessor extends DataProcessor {}
-
-interface StripeGenerator {
-  int next(uint64_t offset, uint64_t *stripe_size) = 0;
-}
-
-class RadosWriter extends DataProcessor{}
-
-class ManifestObjectProcessor extends HeadObjectProcessor, StripeGenerator {
-  # chunk : ChunkProcessor;
-  StripeProcessor stripe;
-}
-
-class AtomicObjectProcessor extends ManifestObjectProcessor{}
-
-
-class Pipe extends DataProcessor {
- - next : DataProcessor*
-}
-
-class ChunkProcessor extends Pipe {
- - chunk_size : uint64_t
- - chunk : bufferlist
-}
-
-class StripeProcessor extends Pipe {
- - gen : StripeGenerator *
- - bounds : pair<uint64_t, uint64_t>
-}
-
-class HeadObjectProcessor extends ObjectProcessor {
-  - head_chunk_size : uint64_t
-  - head_data : bufferlist
-  - data_offset : uint64_t
-  - processor : DataProcessor*
-}
-
- StripeGenerator .[hidden] HeadObjectProcessor
-
-@enduml
-```
-
+在{% post_link 'RGW Data Layout' %}中我们知道， 

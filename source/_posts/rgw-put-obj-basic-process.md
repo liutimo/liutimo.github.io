@@ -115,3 +115,19 @@ classDiagram
   RadosAppendWriter --|> Writer
   RadosMultipartWriter --|> Writer
 ```
+
+## RGW数据接收流程
+
+```C++
+// RGWPutObj::execute
+do {
+  bufferlist data;
+  len = get_data(data);
+  if (len == 0) {
+    break;
+  }
+  filter->process(std::move(data), ofs);
+  ofs += len;
+} while (len > 0);
+filter->process({}, ofs);
+```

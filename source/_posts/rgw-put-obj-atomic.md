@@ -17,7 +17,8 @@ mermaid: true
 ```mermaid
 ---
 title: put obj class diagram
-theme: default
+config:
+  theme: neutral
 ---
 classDiagram
   class DataProcessor {
@@ -107,10 +108,22 @@ classDiagram
 ```mermaid
 ---
 title: RGW Put Obj 流程图
-theme: default
 ---
 flowchart LR
-StripeProcessor --> ChunkProcessor --> RadosWriter
+HeadObjectProcessor --> StripeProcessor --> ChunkProcessor --> RadosWriter
 ```
 
-当客户端
+```mermaid
+---
+title: RGW Put Obj 流程图
+---
+flowchart TB
+    START@{ shape: circ }
+    A@{ shape: rect, label: "len = get_data(data)"}
+    B@{ shape: rect, label: "HeadObjectProcessor::process(data, ofs)" }
+    C@{ shape: diam, label: "len > 0" }
+    D@{ shape: rect, label: "ofs += len"}
+    E@{ shape: rect, label: "HeadObjectProcessor::process({}, ofs)" }
+    START --> A --> B --> C --Y--> D --> A
+    C --N--> E --> STOP@{shape: double-circle}
+```

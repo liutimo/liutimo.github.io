@@ -44,24 +44,24 @@
           <mxGeometry y="208" width="200" height="8" as="geometry" />
         </mxCell>
         <mxCell id="gXGkx-9GyTH6iZ8PwhaR-1" value="data" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="260" y="540" width="100" height="40" as="geometry" />
+          <mxGeometry x="320" y="520" width="100" height="40" as="geometry" />
         </mxCell>
         <mxCell id="gXGkx-9GyTH6iZ8PwhaR-2" value="entry size" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="200" y="540" width="60" height="40" as="geometry" />
+          <mxGeometry x="280" y="520" width="40" height="40" as="geometry" />
         </mxCell>
         <mxCell id="gXGkx-9GyTH6iZ8PwhaR-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="gXGkx-9GyTH6iZ8PwhaR-3" target="gXGkx-9GyTH6iZ8PwhaR-6">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="410" y="510" />
-              <mxPoint x="140" y="510" />
+              <mxPoint x="470" y="490" />
+              <mxPoint x="200" y="490" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="gXGkx-9GyTH6iZ8PwhaR-3" value="start pos" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="360" y="540" width="100" height="40" as="geometry" />
+          <mxGeometry x="420" y="520" width="80" height="40" as="geometry" />
         </mxCell>
         <mxCell id="gXGkx-9GyTH6iZ8PwhaR-6" value="sentinel" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="140" y="540" width="60" height="40" as="geometry" />
+          <mxGeometry x="200" y="520" width="80" height="40" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

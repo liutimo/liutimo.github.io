@@ -159,8 +159,17 @@
         <mxCell id="mRupk-MWuzVmoUMx6u8X-2" value="CDir" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
           <mxGeometry x="730" y="670" width="110" height="50" as="geometry" />
         </mxCell>
+        <mxCell id="mRupk-MWuzVmoUMx6u8X-9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="mRupk-MWuzVmoUMx6u8X-4" target="mRupk-MWuzVmoUMx6u8X-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
         <mxCell id="mRupk-MWuzVmoUMx6u8X-4" value="CInode" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
           <mxGeometry x="920" y="670" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="mRupk-MWuzVmoUMx6u8X-7" value="父目 录分片&lt;div&gt;对应的 CDir对象&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="736" y="600" width="110" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="mRupk-MWuzVmoUMx6u8X-8" value="inode_t" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="920" y="800" width="110" height="50" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

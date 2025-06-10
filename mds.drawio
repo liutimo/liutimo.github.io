@@ -220,7 +220,7 @@
           <mxGeometry x="546" y="1790" width="300" height="60" as="geometry" />
         </mxCell>
         <mxCell id="mRupk-MWuzVmoUMx6u8X-27" value="linkage_t" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" vertex="1" parent="1">
-          <mxGeometry x="546" y="1704" width="220" height="86" as="geometry" />
+          <mxGeometry x="600" y="1670" width="220" height="86" as="geometry" />
         </mxCell>
         <mxCell id="mRupk-MWuzVmoUMx6u8X-28" value="+ inode: CInode*" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="mRupk-MWuzVmoUMx6u8X-27">
           <mxGeometry y="26" width="220" height="26" as="geometry" />

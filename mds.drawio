@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36" version="27.1.4">
   <diagram name="日志" id="AQBK7dn-0XNJKVbFLS9Y">
-    <mxGraphModel dx="595" dy="322" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2339" pageHeight="3300" math="0" shadow="0">
+    <mxGraphModel dx="1042" dy="563" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2339" pageHeight="3300" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -171,7 +171,7 @@
         <mxCell id="mRupk-MWuzVmoUMx6u8X-8" value="inode_t" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
           <mxGeometry x="920" y="800" width="110" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="mRupk-MWuzVmoUMx6u8X-10" value="CDir" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="mRupk-MWuzVmoUMx6u8X-10" value="CDir" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
           <mxGeometry x="340" y="1490" width="220" height="60" as="geometry" />
         </mxCell>
         <mxCell id="mRupk-MWuzVmoUMx6u8X-11" value="+ items: map&amp;lt;dentry_key_t, CDentry*&amp;gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="mRupk-MWuzVmoUMx6u8X-10">
@@ -183,8 +183,8 @@
         <mxCell id="mRupk-MWuzVmoUMx6u8X-15" value="&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: transparent;&quot;&gt;新创建的文件或目录对应的&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: transparent;&quot;&gt;CDentry需要添加到父目录&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: transparent;&quot;&gt;的items中&lt;/span&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
           <mxGeometry x="150" y="1480" width="170" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="mRupk-MWuzVmoUMx6u8X-16" value="CDentry" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="380" y="1650" width="160" height="112" as="geometry" />
+        <mxCell id="mRupk-MWuzVmoUMx6u8X-16" value="CDentry" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="370" y="1592" width="160" height="112" as="geometry" />
         </mxCell>
         <mxCell id="mRupk-MWuzVmoUMx6u8X-17" value="+ dir: CDir*" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="mRupk-MWuzVmoUMx6u8X-16">
           <mxGeometry y="26" width="160" height="26" as="geometry" />
@@ -201,7 +201,7 @@
         <mxCell id="mRupk-MWuzVmoUMx6u8X-20" value="创建文件时，先创建CDentry，建立其与父目录CDir的双向关联。&lt;div&gt;然后创建 CInode&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
           <mxGeometry x="45" y="1843" width="370" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="mRupk-MWuzVmoUMx6u8X-21" value="CInode" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="mRupk-MWuzVmoUMx6u8X-21" value="CInode" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
           <mxGeometry x="650" y="1540" width="160" height="86" as="geometry" />
         </mxCell>
         <mxCell id="mRupk-MWuzVmoUMx6u8X-22" value="+ dir: CDir*" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="mRupk-MWuzVmoUMx6u8X-21">
@@ -215,6 +215,21 @@
         </mxCell>
         <mxCell id="mRupk-MWuzVmoUMx6u8X-26" value="MDS使用linkage_t来描述硬链接。&lt;div&gt;如果是硬链接，remote_ino &amp;gt; 0&lt;/div&gt;&lt;div&gt;如果是普通文件 inode != nullptr &amp;amp;&amp;amp; remote_ino == 0&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
           <mxGeometry x="546" y="1790" width="300" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="mRupk-MWuzVmoUMx6u8X-27" value="linkage_t" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="546" y="1704" width="220" height="86" as="geometry" />
+        </mxCell>
+        <mxCell id="mRupk-MWuzVmoUMx6u8X-28" value="+ inode: CInode*" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="mRupk-MWuzVmoUMx6u8X-27">
+          <mxGeometry y="26" width="220" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="mRupk-MWuzVmoUMx6u8X-30" value="+ remote_ino: inodeno_t" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="mRupk-MWuzVmoUMx6u8X-27">
+          <mxGeometry y="52" width="220" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="mRupk-MWuzVmoUMx6u8X-29" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="mRupk-MWuzVmoUMx6u8X-27">
+          <mxGeometry y="78" width="220" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="mRupk-MWuzVmoUMx6u8X-31" value="一个CDentry" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="175" y="1648" width="90" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

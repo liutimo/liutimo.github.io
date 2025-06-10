@@ -184,7 +184,7 @@
           <mxGeometry x="150" y="1480" width="170" height="60" as="geometry" />
         </mxCell>
         <mxCell id="mRupk-MWuzVmoUMx6u8X-16" value="CDentry" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
-          <mxGeometry x="370" y="1592" width="160" height="112" as="geometry" />
+          <mxGeometry x="370" y="1592" width="160" height="138" as="geometry" />
         </mxCell>
         <mxCell id="mRupk-MWuzVmoUMx6u8X-17" value="+ dir: CDir*" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="mRupk-MWuzVmoUMx6u8X-16">
           <mxGeometry y="26" width="160" height="26" as="geometry" />
@@ -192,11 +192,14 @@
         <mxCell id="mRupk-MWuzVmoUMx6u8X-25" value="+ projected: list&amp;lt;linkage_t&amp;gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="mRupk-MWuzVmoUMx6u8X-16">
           <mxGeometry y="52" width="160" height="26" as="geometry" />
         </mxCell>
+        <mxCell id="mRupk-MWuzVmoUMx6u8X-34" value="+ linkage: linkage_t" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="mRupk-MWuzVmoUMx6u8X-16">
+          <mxGeometry y="78" width="160" height="26" as="geometry" />
+        </mxCell>
         <mxCell id="mRupk-MWuzVmoUMx6u8X-18" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="mRupk-MWuzVmoUMx6u8X-16">
-          <mxGeometry y="78" width="160" height="8" as="geometry" />
+          <mxGeometry y="104" width="160" height="8" as="geometry" />
         </mxCell>
         <mxCell id="mRupk-MWuzVmoUMx6u8X-19" value="+ method(type): type" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="mRupk-MWuzVmoUMx6u8X-16">
-          <mxGeometry y="86" width="160" height="26" as="geometry" />
+          <mxGeometry y="112" width="160" height="26" as="geometry" />
         </mxCell>
         <mxCell id="mRupk-MWuzVmoUMx6u8X-20" value="创建文件时，先创建CDentry，建立其与父目录CDir的双向关联。&lt;div&gt;然后创建 CInode&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
           <mxGeometry x="45" y="1843" width="370" height="40" as="geometry" />
@@ -228,8 +231,8 @@
         <mxCell id="mRupk-MWuzVmoUMx6u8X-29" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="mRupk-MWuzVmoUMx6u8X-27">
           <mxGeometry y="78" width="220" height="8" as="geometry" />
         </mxCell>
-        <mxCell id="mRupk-MWuzVmoUMx6u8X-31" value="一个CDentry" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
-          <mxGeometry x="175" y="1648" width="90" height="30" as="geometry" />
+        <mxCell id="mRupk-MWuzVmoUMx6u8X-32" value="Dentry在传统文件系统实现中&lt;div&gt;是一个内存数据结构。&lt;/div&gt;&lt;div&gt;无论是文件还是目录，&lt;/div&gt;&lt;div&gt;都会有CDentry与之对应。&lt;span style=&quot;background-color: transparent;&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="190" y="1613" width="180" height="70" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
